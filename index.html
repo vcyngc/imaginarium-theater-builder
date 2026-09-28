@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imaginarium Theater Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <h1>IT Builder</h1>
+            <p><i>"Design your party strategy your way, though RNG will always have the final say"</i></p>
+        </div>
+        
+        <section class="card glass-effect">
+            <div class="card-header">
+                <h2>Syarat Jenis Elemen</h2>
+                <span class="badge">Maks: 3</span>
+            </div>
+            <div id="element-container" class="element-list"></div>
+        </section>
+
+        <section class="card glass-effect">
+            <div class="card-header">
+                <h2>Susunan Roster Karakter</h2>
+                <button class="btn-reset-chic" onclick="resetSemuaData()">
+                    <span class="reset-icon">🗑️</span> Reset Data
+                </button>
+            </div>
+            <div class="roster-group">
+                <div class="roster-title">
+                    <h3>Karakter Pembuka</h3>
+                    <span class="counter"><span id="count-pembuka">0</span> / 6</span>
+                </div>
+                <div id="slot-pembuka" class="slot-list"></div>
+            </div>
+            <div class="roster-group">
+                <div class="roster-title">
+                    <h3>Karakter Undangan</h3>
+                    <span class="counter"><span id="count-undangan">0</span> / 4</span>
+                </div>
+                <div id="slot-undangan" class="slot-list"></div>
+            </div>
+            <div class="roster-group">
+                <div class="roster-title">
+                    <h3>Karakter Cadangan</h3>
+                    <span class="counter hint">Min: 22 | Maks: 26 (Total Party: <span id="count-total-cadangan" class="highlight-text">0</span>)</span>
+                </div>
+                <div id="slot-cadangan" class="slot-list"></div>
+            </div>
+        </section>
+
+        <section class="card glass-effect">
+            <div class="card-header">
+                <h2>Pengaturan Stage</h2>
+            </div>
+            <div id="stages-container"></div>
+        </section>
+    </div>
+
+    <!-- Pop-up Galeri / Panel Samping -->
+    <div id="modal-galeri" class="modal hidden" onclick="handleOutsideClick(event)">
+        <div class="glass-modal">
+            <div class="modal-header-advanced">
+                <div class="modal-title-row">
+                    <h2 id="modal-title">Pilih Karakter</h2>
+                    <div class="header-actions">
+                        <span id="modal-counter" class="modal-counter">0 dipilih</span>
+                        <button class="btn-close" onclick="tutupGaleri()">✕</button>
+                    </div>
+                </div>
+                <div class="search-box-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" class="search-input" placeholder="Cari nama karakter..." onkeyup="cariKarakter()">
+                </div>
+                <div id="modal-filter-container" class="modal-filters"></div>
+            </div>
+            
+            <div id="gallery-container" class="gallery-grid"></div>
+            
+            <div class="modal-footer">
+                <button class="btn-reset" onclick="resetPilihanModal()">Reset</button>
+                <button id="btn-submit-modal" class="btn-submit" onclick="konfirmasiPilihan()" disabled>Pilih (0/26)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tombol Scroll to Top -->
+    <button id="btn-scroll-top" class="scroll-top-btn" onclick="scrollToTop()" title="Kembali ke atas">
+        ▲
+    </button>
+
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
