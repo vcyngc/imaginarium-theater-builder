@@ -3,8 +3,14 @@
 ========================================= */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap');
 
+html {
+    background-color: #080511;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 :root {
-    --gold-primary: #F3E5AB;
+    --gold-primary: #f3e5ab;
     --gold-dark: #D4AF37;
     --gold-deep: #8A6F16;
     --card-glass: rgba(12, 10, 29, 0.75);
@@ -27,14 +33,15 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    background-color: #080511;
     
     color: var(--text-main);
     font-family: 'Outfit', sans-serif;
     min-height: 100vh;
     padding: clamp(20px, 4vw, 40px);
     overflow-x: hidden;
+    margin: 0;
 }
-
 .main-container { max-width: 1150px; margin: 0 auto; width: 100%; }
 
 /* =========================================
@@ -108,7 +115,7 @@ body {
 .btn-element.active img { width: 75%; height: 75%; opacity: 1; filter: drop-shadow(0 0 6px rgba(255,255,255,0.8)); }
 
 /* =========================================
-   5. SLOT KARAKTER (TANPA BORDER EMAS)
+   5. SLOT KARAKTER
 ========================================= */
 .roster-group { margin-bottom: 40px; }
 .roster-title { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
@@ -166,7 +173,7 @@ body {
     visibility: hidden; 
     pointer-events: none;
     
-    /* Tahap 1: Latar belakang meredup terlebih dahulu (durasi 0.3 detik) */
+    
     transition: background-color 0.3s ease, opacity 0.38s ease, visibility 0.3s ease;
 }
 
@@ -174,7 +181,7 @@ body {
     opacity: 1; 
     visibility: visible; 
     pointer-events: auto; 
-    background: rgba(4, 2, 8, 0.85); /* Latar belakang redup penuh */
+    background: rgba(4, 2, 8, 0.85); 
 }
 
 .glass-modal { 
@@ -184,8 +191,7 @@ body {
     padding: 28px; 
     width: 100%; 
     max-width: 680px; 
-    /* Diperpanjang dari 85vh / 800px menjadi 92vh / 900px */
-    height: 92vh; 
+    height: 95vh; 
     max-height: 900px; 
     display: flex; 
     flex-direction: column;
@@ -195,10 +201,8 @@ body {
     opacity: 0;
 }
 
-/* Tahap 2: Menu baru akan meluncur SETELAH layar selesai meredup */
 .modal:not(.hidden) .glass-modal { 
     animation: sequentialSlideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    /* Jeda waktu (delay) 0.3 detik membuat menu menunggu latar belakang selesai redup dulu */
     animation-delay: 0.33s; 
     will-change: transform, opacity;
 }
@@ -216,6 +220,7 @@ body {
 .modal-header-advanced { border-bottom: 1px solid rgba(243, 229, 171, 0.15); padding-bottom: 20px; margin-bottom: 20px; flex-shrink: 0; }
 .modal-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
 .modal-title-row h2 { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold-primary); font-size: 1.35rem; }
+.modal-counter { display: none !important;}
 
 .search-box-wrapper { position: relative; width: 100%; margin-bottom: 15px; }
 .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1rem; color: var(--text-muted); }
@@ -226,10 +231,26 @@ body {
 .search-input:focus { outline: none; border-color: var(--gold-primary); background: #000; box-shadow: 0 0 10px rgba(212,175,55,0.2); }
 
 .btn-close { 
-    background: rgba(255,255,255,0.05); color: var(--text-muted); border: none; 
-    width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 1rem; transition: 0.2s; 
+    background: #EF4444 !important; 
+    color: #FFFFFF !important; 
+    border: none; 
+    width: 36px; 
+    height: 36px; 
+    border-radius: 50%; 
+    cursor: pointer; 
+    font-size: 1.1rem; 
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease; 
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }
-.btn-close:hover { background: #EF4444; color: white; transform: rotate(90deg); }
+.btn-close:hover { 
+    background: #DC2626 !important; 
+    transform: rotate(90deg) scale(1.1); 
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.6);
+}
 
 .modal-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .btn-filter { 
@@ -249,20 +270,33 @@ body {
     align-content: start; 
     gap: 14px; 
     
-    /* Mengaktifkan scroll internal dan mengisi sisa ruang secara stabil */
+    
     overflow-y: auto; 
     padding: 5px 5px 20px 5px; 
     flex-grow: 1; 
-    min-height: 0; /* Penting agar flexbox anak tidak meluber ke luar batas */
+    min-height: 0; 
 }
 
 .gallery-item-wrapper { position: relative; cursor: pointer; border-radius: 10px; width: 100%; aspect-ratio: 1 / 1; transition: 0.2s;}
 .gallery-item-wrapper .char-img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 10px; border: none !important;}
 .gallery-item-wrapper:hover { transform: scale(1.05); z-index: 5; box-shadow: 0 10px 20px rgba(0,0,0,0.8); }
 .gallery-item-wrapper.selected .char-img { filter: brightness(0.4); transform: scale(0.92); border-radius: 12px; }
+.gallery-separator {
+    grid-column: 1 / -1;
+    width: 100%;
+    border-bottom: 1px solid rgba(243, 229, 171, 0.2);
+    margin: 15px 0 5px 0;
+    color: var(--gold-dark);
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    padding-bottom: 6px;
+}
 
 /* =========================================
-   7. LENCANA (BADGE)
+   6. LENCANA (BADGE)
 ========================================= */
 .gallery-item-wrapper.selected::after { 
     content: '✓'; position: absolute; top: -6px; right: -6px; 
@@ -289,7 +323,7 @@ body {
 .char-used-vigor { opacity: 0.6; filter: grayscale(40%); }
 
 /* =========================================
-   8. FOOTER & TOMBOL AKSI
+   7. FOOTER & TOMBOL AKSI
 ========================================= */
 .modal-footer { 
     margin-top: 20px; 
@@ -320,7 +354,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Tombol Pilih / Konfirmasi Utama di Footer Panel (Emas Kerajaan) */
+/* Tombol Pilih / Konfirmasi Utama di Footer Panel */
 .btn-submit { 
     background: linear-gradient(135deg, #E6C567, #C69A35); 
     color: #0A0712; 
@@ -385,7 +419,7 @@ body {
 }
 
 /* =========================================
-   9. PENGATURAN STAGE & TOMBOL SCROLL UP
+   8. PENGATURAN STAGE & TOMBOL SCROLL UP
 ========================================= */
 #stages-container {
     display: grid;
@@ -463,7 +497,7 @@ body {
 .stage-sub-title.blue-text { color: #38BDF8; }
 .stage-sub-title.red-text { color: #EF4444; }
 
-/* Menyesuaikan Ukuran Slot di dalam Kartu Matriks (4 Slot Presisi 1 Baris) */
+/* Menyesuaikan Ukuran Slot di dalam Kartu Matriks */
 .stage-item .slot-list {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
@@ -478,7 +512,7 @@ body {
     font-size: 1.1rem;
 }
 
-/* Penyesuaian Ukuran Lencana/Badge Kecil pada Slot Matriks */
+/* Penyesuaian Ukuran Lencana/Badge pada Slot Matriks */
 .stage-item .badge-indicator {
     width: 18px;
     height: 18px;
@@ -549,18 +583,18 @@ body {
     }
 }
 
-/* Poin 2: Tombol Scroll Up Diperbesar & Digeser Lebih ke Kiri */
+/* Tombol Scroll Up */
 .scroll-top-btn {
     position: fixed;
     bottom: 35px;
-    right: 50px; /* Digeser lebih ke kiri (sebelumnya 30px) */
-    width: 56px;  /* Diperbesar dari 48px */
-    height: 56px; /* Diperbesar dari 48px */
+    right: 50px; 
+    width: 56px;  
+    height: 56px; 
     background: rgba(12, 10, 29, 0.9);
     color: var(--gold-primary);
     border: 2px solid var(--gold-dark);
     border-radius: 14px;
-    font-size: 1.3rem; /* Ukuran panah diperbesar */
+    font-size: 1.3rem; 
     font-weight: bold;
     display: flex;
     justify-content: center;

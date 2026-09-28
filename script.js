@@ -246,14 +246,17 @@ window.bukaGaleri = function(target, stageIndex = null) {
     const filterContainer = document.getElementById('modal-filter-container');
 
     if (targetModal === 'boss') {
-        db = bossDB;
+        db = bossDB.filter(item => {
+            let p = getPath(item);
+            return !p.includes('Defense-Monolith');
+        });
+        
         tempSelection = susunanBoss[stageIndex] ? [...susunanBoss[stageIndex]] : [];
         if (editingContext.oldPath) {
             tempSelection = tempSelection.filter(p => p !== editingContext.oldPath);
         }
-        let teksBos = (stageIndex === 10 || stageIndex === 11) ? "(Maks 4 Boss)" : "";
-        document.getElementById('modal-title').innerText = `Pilih Boss / Monster ${teksBos}`;
         
+        document.getElementById('modal-title').innerText = `Pilih Boss / Monster`;
         filterContainer.classList.add('hidden');
         filterContainer.innerHTML = "";
         document.getElementById('search-input').placeholder = "Cari nama boss / monster...";
@@ -271,18 +274,16 @@ window.bukaGaleri = function(target, stageIndex = null) {
                 tempSelection = tempSelection.filter(p => p !== editingContext.oldPath);
             }
 
-            // PERBAIKAN LOGIKA: Karakter tetap dapat dipilih kembali meskipun Main Party sudah 4/4 lengkap
-            // Karakter hanya difilter jika pemakaian Vigor sudah mencapai/melebihi 2 kali di luar pilihan saat ini.
             db = db.filter(item => {
                 let p = getPath(item);
                 let count = hitungTotalPemakaian(p);
                 let sedangDipilihSaatIni = tempSelection.includes(p);
-                
                 if (count >= 2 && !sedangDipilihSaatIni) return false;
                 return true;
             });
 
-            document.getElementById('modal-title').innerText = `Pilih Karakter ${targetModal.toUpperCase()} (Stage ${stages[stageIndex].nama})`;
+            let labelParty = targetModal === 'inti' ? 'Main Party' : 'Optional Party';
+            document.getElementById('modal-title').innerText = `Pilih Karakter ${labelParty}`;
         } else {
             if (targetModal === 'pembuka' || targetModal === 'cadangan') {
                 db = karakterDB.filter(item => elemenTerpilih.includes(getElemen(item)));
@@ -303,15 +304,25 @@ window.bukaGaleri = function(target, stageIndex = null) {
                 let p = getPath(item);
                 return !rosterAktif.includes(p) || tempSelection.includes(p);
             });
-            let sisaTotal = 26 - (susunan.undangan.length + susunan.cadangan.length) + tempSelection.length;
-            document.getElementById('modal-title').innerText = `Pilih Karakter ${targetModal.toUpperCase()} (${sisaTotal})`;
+            
+            document.getElementById('modal-title').innerText = `Pilih Karakter ${targetModal.toUpperCase()}`;
         }
         
-        // Sorting Bintang 5 di atas, Bintang 4 di bawah
+        // --- LOGIKA SORTING BARU (PRIORITAS KARAKTER PEMBUKA) ---
         db.sort((a, b) => {
+            // 1. Jika di menu Stage, Karakter Pembuka taruh di paling atas
+            if (targetModal === 'inti' || targetModal === 'opsional') {
+                let isPembukaA = susunan.pembuka.includes(getPath(a)) ? 1 : 0;
+                let isPembukaB = susunan.pembuka.includes(getPath(b)) ? 1 : 0;
+                if (isPembukaA !== isPembukaB) return isPembukaB - isPembukaA;
+            }
+
+            // 2. Sorting Bintang 5 di atas Bintang 4
             let bA = getBintang(a);
             let bB = getBintang(b);
             if (bA !== bB) return bB - bA; 
+            
+            // 3. Sorting Alphabet
             return getNamaDariPath(a).localeCompare(getNamaDariPath(b));
         });
 
@@ -379,11 +390,36 @@ function renderIsiGaleri(dataListPaths) {
     const gallery = document.getElementById('gallery-container');
     gallery.innerHTML = "";
     if (dataListPaths.length === 0) {
-        gallery.innerHTML = "<p style='color: #94A3B8; width: 100%; text-align: center; margin-top: 20px;'>Tidak ada karakter ditemukan.</p>"; return;
+        gallery.innerHTML = "<p style='color: #94A3B8; width: 100%; text-align: center; margin-top: 20px; grid-column: 1 / -1;'>Tidak ada karakter ditemukan.</p>"; return;
     }
+
+    // Variabel pendeteksi untuk garis pemisah
+    let hasShownPembukaHeader = false;
+    let hasShownOtherHeader = false;
 
     dataListPaths.forEach(item => {
         let path = getPath(item);
+        
+        // --- LOGIKA MENAMPILKAN GARIS PEMISAH DI STAGE ---
+        if (targetModal === 'inti' || targetModal === 'opsional') {
+            let isPembuka = susunan.pembuka.includes(path);
+            
+            if (isPembuka && !hasShownPembukaHeader) {
+                let header = document.createElement('div');
+                header.className = 'gallery-separator';
+                header.innerText = 'Karakter Pembuka';
+                gallery.appendChild(header);
+                hasShownPembukaHeader = true;
+            } 
+            else if (!isPembuka && !hasShownOtherHeader) {
+                let header = document.createElement('div');
+                header.className = 'gallery-separator';
+                header.innerText = 'Karakter Lainnya';
+                gallery.appendChild(header);
+                hasShownOtherHeader = true;
+            }
+        }
+
         let wrapper = document.createElement('div');
         wrapper.className = 'gallery-item-wrapper';
         wrapper.title = getNamaDariPath(item);
@@ -394,7 +430,7 @@ function renderIsiGaleri(dataListPaths) {
         let img = document.createElement('img');
         img.src = path; 
         img.className = 'char-img';
-        img.loading = 'lazy';
+        img.loading = 'lazy'; 
         img.style.backgroundColor = targetModal === 'boss' ? '#450a0a' : 'transparent';
         if (targetModal === 'boss') img.style.borderColor = '#ef4444';
         
@@ -402,7 +438,6 @@ function renderIsiGaleri(dataListPaths) {
             this.src = 'assets/placeholder-silhouette.png';
         };
         
-        // Indikator Vigor Karakter
         if (targetModal === 'inti' || targetModal === 'opsional') {
             let pemakaian = hitungTotalPemakaian(path);
             let adaDiContextEdit = (editingContext.oldPath === path);
@@ -416,7 +451,6 @@ function renderIsiGaleri(dataListPaths) {
             }
         }
 
-        // Indikator Act Boss
         if (targetModal === 'boss') {
             let actsAsal = cariActBoss(path);
             let adaDiContextEdit = (editingContext.oldPath === path);
@@ -486,7 +520,19 @@ function togglePilihanGaleri(path, wrapperElement) {
             }
 
             let total = tempSelection.length + 1;
-            if (targetModal === 'pembuka' && total > 6) { tampilkanPeringatan("Maksimal 6!"); return; }
+            
+            // --- LOGIKA BATAS 2 KARAKTER TIAP ELEMEN ---
+            if (targetModal === 'pembuka') {
+                if (total > 6) { tampilkanPeringatan("Maksimal 6!"); return; }
+                
+                let elemenTarget = getElemen(path);
+                let countElemen = tempSelection.filter(p => getElemen(p) === elemenTarget).length;
+                if (countElemen >= 2) {
+                    tampilkanPeringatan(`Maksimal 2 Karakter untuk Elemen ${elemenTarget} di Roster Pembuka!`);
+                    return;
+                }
+            }
+            
             if (targetModal === 'undangan') {
                 if (total > 4) { tampilkanPeringatan("Maksimal 4!"); return; }
                 if (total > (26 - susunan.cadangan.length)) { tampilkanPeringatan("Kuota Penuh!"); return; }
@@ -523,7 +569,13 @@ function checkSyaratMasuk() {
     btn.disabled = !valid;
 }
 
-function updateModalState() { document.getElementById('modal-counter').innerText = `${tempSelection.length} dipilih`; checkSyaratMasuk(); }
+function updateModalState() { 
+    let counterElement = document.getElementById('modal-counter');
+    if(counterElement) {
+        counterElement.innerText = `${tempSelection.length} dipilih`; 
+    }
+    checkSyaratMasuk(); 
+}
 
 window.resetPilihanModal = function() {
     tempSelection = []; 
@@ -587,7 +639,7 @@ function initStages() {
                     <div id="monolith-slot-${index}" class="slot-list"></div>
                 </div>`;
         } else if (stage.type === "boss") {
-            let labelTitle = (index === 10 || index === 11) ? "Boss Target (Maks 4)" : "Boss Target";
+            let labelTitle = (index === 10 || index === 11) ? "Boss Target" : "Boss Target";
             specialHTML = `
                 <div class="stage-sec">
                     <h4 class="stage-sub-title red-text">${labelTitle}</h4>
@@ -638,11 +690,13 @@ function updateTampilanMonolith() {
     wrapper.style.position = 'relative';
 
     let img = document.createElement('img');
-    img.src = "assets/ui/Defense-Monolith.png"; 
+    img.src = "assets/ui/Defense-Monolith.png";
     img.className = 'char-img'; 
     img.title = "Defense Monolith";
     img.style.borderColor = '#38BDF8'; 
-    img.onerror = function() { this.src = 'assets/placeholder-silhouette.png'; };
+    img.onerror = function() { 
+        this.src = 'assets/boss/Defense-Monolith.png'; 
+    };
     
     wrapper.appendChild(img);
     container.appendChild(wrapper);
@@ -783,46 +837,3 @@ window.scrollToTop = function() {
         behavior: 'smooth'
     });
 }
-
-// --- FITUR EKSPOR GAMBAR STRATEGI ---
-window.eksporGambarStrategi = function() {
-    if (typeof html2canvas === 'undefined') {
-        tampilkanPeringatan("Pustaka html2canvas belum dimuat!");
-        return;
-    }
-
-    Swal.fire({
-        title: 'Menerbitkan Gambar...',
-        text: 'Mohon tunggu sebentar, gambar strategi Anda sedang dibuat.',
-        allowOutsideClick: false,
-        didOpen: () => { Swal.showLoading(); }
-    });
-
-    const targetElement = document.querySelector('.main-container');
-
-    html2canvas(targetElement, {
-        backgroundColor: '#080511',
-        scale: 2,
-        useCORS: true
-    }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = `Imaginarium-Theater-Strategy-${new Date().toISOString().slice(0,10)}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-
-        Swal.fire({
-            title: 'Berhasil!',
-            text: 'Gambar strategi berhasil diunduh.',
-            icon: 'success',
-            background: '#11151F', color: '#fff', confirmButtonColor: '#7C3AED'
-        });
-    }).catch(err => {
-        console.error(err);
-        Swal.fire({
-            title: 'Gagal!',
-            text: 'Gagal membuat gambar strategi.',
-            icon: 'error',
-            background: '#11151F', color: '#fff'
-        });
-    });
-};

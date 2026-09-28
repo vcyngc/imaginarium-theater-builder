@@ -940,9 +940,49 @@ const karakterDB = [
 ];
 const bossDB = [
     {
+        "id": "arithmetic-enhancer-mek",
+        "nama": "Arithmetic Enhancer Mek",
+        "path": "assets/boss/Arithmetic-Enhancer-Mek.png"
+    },
+    {
+        "id": "biting-cold-wayob-manifestation",
+        "nama": "Biting Cold Wayob Manifestation",
+        "path": "assets/boss/Biting-Cold-Wayob-Manifestation.png"
+    },
+    {
         "id": "chimeric-winged-lion",
         "nama": "Chimeric Winged Lion",
         "path": "assets/boss/Chimeric-Winged-Lion.png"
+    },
+    {
+        "id": "churldric",
+        "nama": "Churldric",
+        "path": "assets/boss/Churldric.png"
+    },
+    {
+        "id": "consecrated-fanged-beast",
+        "nama": "Consecrated Fanged Beast",
+        "path": "assets/boss/Consecrated-Fanged-Beast.png"
+    },
+    {
+        "id": "consecrated-horned-crocodile",
+        "nama": "Consecrated Horned Crocodile",
+        "path": "assets/boss/Consecrated-Horned-Crocodile.png"
+    },
+    {
+        "id": "consecrated-red-vulture",
+        "nama": "Consecrated Red Vulture",
+        "path": "assets/boss/Consecrated-Red-Vulture.png"
+    },
+    {
+        "id": "consecrated-scorpion",
+        "nama": "Consecrated Scorpion",
+        "path": "assets/boss/Consecrated-Scorpion.png"
+    },
+    {
+        "id": "experimental-field-generator",
+        "nama": "Experimental Field Generator",
+        "path": "assets/boss/Experimental-Field-Generator.png"
     },
     {
         "id": "furiosa",
@@ -950,9 +990,34 @@ const bossDB = [
         "path": "assets/boss/Furiosa.png"
     },
     {
+        "id": "gluttonous-yumkasaur-mountain-king",
+        "nama": "Gluttonous Yumkasaur Mountain King",
+        "path": "assets/boss/Gluttonous-Yumkasaur-Mountain-King.png"
+    },
+    {
+        "id": "jadeplume-terrorshroom",
+        "nama": "Jadeplume Terrorshroom",
+        "path": "assets/boss/Jadeplume-Terrorshroom.png"
+    },
+    {
+        "id": "lord-of-the-hidden-depths-whisperer-of-nightmares",
+        "nama": "Lord of the Hidden Depths Whisperer of Nightmares",
+        "path": "assets/boss/Lord-of-the-Hidden-Depths-Whisperer-of-Nightmares.png"
+    },
+    {
         "id": "perpetual-mechanical-array",
         "nama": "Perpetual Mechanical Array",
         "path": "assets/boss/Perpetual-Mechanical-Array.png"
+    },
+    {
+        "id": "radiant-moonfly",
+        "nama": "Radiant Moonfly",
+        "path": "assets/boss/Radiant-Moonfly.png"
+    },
+    {
+        "id": "radiant-moongecko",
+        "nama": "Radiant Moongecko",
+        "path": "assets/boss/Radiant-Moongecko.png"
     },
     {
         "id": "rockfond-rifthound",
@@ -983,5 +1048,20 @@ const bossDB = [
         "id": "secret-source-automaton-overseer-device",
         "nama": "Secret Source Automaton Overseer Device",
         "path": "assets/boss/Secret-Source-Automaton-Overseer-Device.png"
+    },
+    {
+        "id": "shadowy-husk-defender",
+        "nama": "Shadowy Husk Defender",
+        "path": "assets/boss/Shadowy-Husk-Defender.png"
+    },
+    {
+        "id": "shadowy-husk-line-breaker",
+        "nama": "Shadowy Husk Line Breaker",
+        "path": "assets/boss/Shadowy-Husk-Line-Breaker.png"
+    },
+    {
+        "id": "shadowy-husk-standard-bearer",
+        "nama": "Shadowy Husk Standard Bearer",
+        "path": "assets/boss/Shadowy-Husk-Standard-Bearer.png"
     }
 ];
