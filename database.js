@@ -940,24 +940,64 @@ const karakterDB = [
 ];
 const bossDB = [
     {
+        "id": "aeonblight-drake",
+        "nama": "Aeonblight Drake",
+        "path": "assets/boss/Aeonblight-Drake.png"
+    },
+    {
+        "id": "algorithm-of-semi-intransient-matrix-of-overseer-network",
+        "nama": "Algorithm of Semi Intransient Matrix of Overseer Network",
+        "path": "assets/boss/Algorithm-of-Semi-Intransient-Matrix-of-Overseer-Network.png"
+    },
+    {
         "id": "arithmetic-enhancer-mek",
         "nama": "Arithmetic Enhancer Mek",
         "path": "assets/boss/Arithmetic-Enhancer-Mek.png"
     },
     {
-        "id": "biting-cold-wayob-manifestation",
-        "nama": "Biting Cold Wayob Manifestation",
-        "path": "assets/boss/Biting-Cold-Wayob-Manifestation.png"
+        "id": "battle-hardened-chimeric-volkodlak-archer",
+        "nama": "Battle Hardened Chimeric Volkodlak Archer",
+        "path": "assets/boss/Battle-Hardened-Chimeric-Volkodlak-Archer.png"
+    },
+    {
+        "id": "battle-hardened-elite-treasure-hoarder",
+        "nama": "Battle Hardened Elite Treasure Hoarder",
+        "path": "assets/boss/Battle-Hardened-Elite-Treasure-Hoarder.png"
+    },
+    {
+        "id": "battle-hardened-mandragora",
+        "nama": "Battle Hardened Mandragora",
+        "path": "assets/boss/Battle-Hardened-Mandragora.png"
+    },
+    {
+        "id": "battle-hardened-pipilpan-idol",
+        "nama": "Battle Hardened Pipilpan Idol",
+        "path": "assets/boss/Battle-Hardened-Pipilpan-Idol.png"
+    },
+    {
+        "id": "battle-hardened-precursor's-secret-source-matrix-of-overseer-network",
+        "nama": "Battle Hardened Precursor's Secret Source Matrix of Overseer Network",
+        "path": "assets/boss/Battle-Hardened-Precursor's-Secret-Source-Matrix-of-Overseer-Network.png"
+    },
+    {
+        "id": "battle-hardened-primordial-bathysmal-vishap",
+        "nama": "Battle Hardened Primordial Bathysmal Vishap",
+        "path": "assets/boss/Battle-Hardened-Primordial-Bathysmal-Vishap.png"
+    },
+    {
+        "id": "battle-hardened-samachurl",
+        "nama": "Battle Hardened Samachurl",
+        "path": "assets/boss/Battle-Hardened-Samachurl.png"
+    },
+    {
+        "id": "battle-hardened-waveshuttler",
+        "nama": "Battle Hardened Waveshuttler",
+        "path": "assets/boss/Battle-Hardened-Waveshuttler.png"
     },
     {
         "id": "chimeric-winged-lion",
         "nama": "Chimeric Winged Lion",
         "path": "assets/boss/Chimeric-Winged-Lion.png"
-    },
-    {
-        "id": "churldric",
-        "nama": "Churldric",
-        "path": "assets/boss/Churldric.png"
     },
     {
         "id": "consecrated-fanged-beast",
@@ -980,14 +1020,34 @@ const bossDB = [
         "path": "assets/boss/Consecrated-Scorpion.png"
     },
     {
+        "id": "emperor-of-fire-and-iron",
+        "nama": "Emperor of Fire and Iron",
+        "path": "assets/boss/Emperor-of-Fire-and-Iron.png"
+    },
+    {
+        "id": "eremite-daythunde",
+        "nama": "Eremite Daythunde",
+        "path": "assets/boss/Eremite-Daythunde.png"
+    },
+    {
+        "id": "eremite-desert-clearwater",
+        "nama": "Eremite Desert Clearwater",
+        "path": "assets/boss/Eremite-Desert-Clearwater.png"
+    },
+    {
+        "id": "eremite-scorching-loremaste",
+        "nama": "Eremite Scorching Loremaste",
+        "path": "assets/boss/Eremite-Scorching-Loremaste.png"
+    },
+    {
+        "id": "eremite-stone-enchanter",
+        "nama": "Eremite Stone Enchanter",
+        "path": "assets/boss/Eremite-Stone-Enchanter.png"
+    },
+    {
         "id": "experimental-field-generator",
         "nama": "Experimental Field Generator",
         "path": "assets/boss/Experimental-Field-Generator.png"
-    },
-    {
-        "id": "furiosa",
-        "nama": "Furiosa",
-        "path": "assets/boss/Furiosa.png"
     },
     {
         "id": "gluttonous-yumkasaur-mountain-king",
@@ -995,9 +1055,34 @@ const bossDB = [
         "path": "assets/boss/Gluttonous-Yumkasaur-Mountain-King.png"
     },
     {
+        "id": "goldflame-qucusaur-tyrant",
+        "nama": "Goldflame Qucusaur Tyrant",
+        "path": "assets/boss/Goldflame-Qucusaur-Tyrant.png"
+    },
+    {
+        "id": "iniquitous-baptist-caller-of-fulmination,-flame,-and-flood",
+        "nama": "Iniquitous Baptist Caller of Fulmination, Flame, and Flood",
+        "path": "assets/boss/Iniquitous-Baptist-Caller-of-Fulmination,-Flame,-and-Flood.png"
+    },
+    {
         "id": "jadeplume-terrorshroom",
         "nama": "Jadeplume Terrorshroom",
         "path": "assets/boss/Jadeplume-Terrorshroom.png"
+    },
+    {
+        "id": "knuckle-duckle",
+        "nama": "Knuckle Duckle",
+        "path": "assets/boss/Knuckle-Duckle.png"
+    },
+    {
+        "id": "lava-dragon-statue",
+        "nama": "Lava Dragon Statue",
+        "path": "assets/boss/Lava-Dragon-Statue.png"
+    },
+    {
+        "id": "legatus-golem",
+        "nama": "Legatus Golem",
+        "path": "assets/boss/Legatus-Golem.png"
     },
     {
         "id": "lord-of-the-hidden-depths-whisperer-of-nightmares",
@@ -1005,9 +1090,39 @@ const bossDB = [
         "path": "assets/boss/Lord-of-the-Hidden-Depths-Whisperer-of-Nightmares.png"
     },
     {
+        "id": "maguu-kenki lone-gale",
+        "nama": "Maguu Kenki Lone Gale",
+        "path": "assets/boss/Maguu-Kenki Lone-Gale.png"
+    },
+    {
+        "id": "maguu-kenki-galloping-frost",
+        "nama": "Maguu Kenki Galloping Frost",
+        "path": "assets/boss/Maguu-Kenki-Galloping-Frost.png"
+    },
+    {
+        "id": "maguu-kenki-mask-of-terror",
+        "nama": "Maguu Kenki Mask of Terror",
+        "path": "assets/boss/Maguu-Kenki-Mask-of-Terror.png"
+    },
+    {
+        "id": "millennial-pearl-seahorse",
+        "nama": "Millennial Pearl Seahorse",
+        "path": "assets/boss/Millennial-Pearl-Seahorse.png"
+    },
+    {
         "id": "perpetual-mechanical-array",
         "nama": "Perpetual Mechanical Array",
         "path": "assets/boss/Perpetual-Mechanical-Array.png"
+    },
+    {
+        "id": "potapo's-solidarity-secret-shadow's-re-emergence",
+        "nama": "Potapo's Solidarity Secret Shadow's Re Emergence",
+        "path": "assets/boss/Potapo's-Solidarity-Secret-Shadow's-Re-Emergence.png"
+    },
+    {
+        "id": "primo-geovishap",
+        "nama": "Primo Geovishap",
+        "path": "assets/boss/Primo-Geovishap.png"
     },
     {
         "id": "radiant-moonfly",
@@ -1063,5 +1178,30 @@ const bossDB = [
         "id": "shadowy-husk-standard-bearer",
         "nama": "Shadowy Husk Standard Bearer",
         "path": "assets/boss/Shadowy-Husk-Standard-Bearer.png"
+    },
+    {
+        "id": "solitary-suanni",
+        "nama": "Solitary Suanni",
+        "path": "assets/boss/Solitary-Suanni.png"
+    },
+    {
+        "id": "super-heavy-landrover-mechanized-fortress",
+        "nama": "Super Heavy Landrover Mechanized Fortress",
+        "path": "assets/boss/Super-Heavy-Landrover-Mechanized-Fortress.png"
+    },
+    {
+        "id": "tenebrous-mimesis-qucusaurus-warrior-heartstar-hammer-shard-striker-rockbreaker-blade-icy-tidebearer",
+        "nama": "Tenebrous Mimesis Qucusaurus Warrior Heartstar Hammer Shard Striker Rockbreaker Blade Icy Tidebearer",
+        "path": "assets/boss/Tenebrous-Mimesis-Qucusaurus-Warrior-Heartstar-Hammer-Shard-Striker-Rockbreaker-Blade-Icy-Tidebearer.png"
+    },
+    {
+        "id": "veteran-frost-operative",
+        "nama": "Veteran Frost Operative",
+        "path": "assets/boss/Veteran-Frost-Operative.png"
+    },
+    {
+        "id": "veteran-wind-operative",
+        "nama": "Veteran Wind Operative",
+        "path": "assets/boss/Veteran-Wind-Operative.png"
     }
 ];
