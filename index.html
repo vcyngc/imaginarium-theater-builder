@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imaginarium Theater Builder</title>
     <link rel="icon" href="assets/ui/ITeB-logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/ui/ITeB-logo.png">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -27,7 +28,9 @@
             <div class="card-header">
                 <h2>Character Roster Setup</h2>
                 <div class="header-action-buttons" style="display: flex; gap: 10px;">
-                    <button class="btn-reset-chic" onclick="resetSemuaData()">🗑️ Reset Data</button>
+                    <button class="btn-reset-chic" onclick="resetSemuaData()">
+                        <span class="reset-icon">🗑️</span> Reset Data
+                    </button>
                 </div>
             </div>
             <div class="roster-group">
@@ -47,7 +50,7 @@
             <div class="roster-group">
                 <div class="roster-title">
                     <h3>Available Characters</h3>
-                    <span class="counter hint">Min: 22 | Max: 26 (Total Party: <span id="count-total-cadangan">0</span>)</span>
+                    <span class="counter hint">Min: 22 | Max: 26 (Total Party: <span id="count-total-cadangan" class="highlight-text">0</span>)</span>
                 </div>
                 <div id="slot-cadangan" class="slot-list"></div>
             </div>
@@ -61,12 +64,14 @@
         </section>
     </div>
 
+    <!-- Gallery -->
     <div id="modal-galeri" class="modal hidden" onclick="handleOutsideClick(event)">
         <div class="glass-modal">
             <div class="modal-header-advanced">
                 <div class="modal-title-row">
                     <h2 id="modal-title">Select Character</h2>
                     <div class="header-actions">
+                        <span id="modal-counter" class="modal-counter">0 selected</span>
                         <button class="btn-close" onclick="tutupGaleri()">✕</button>
                     </div>
                 </div>
@@ -76,15 +81,23 @@
                 </div>
                 <div id="modal-filter-container" class="modal-filters"></div>
             </div>
+            
             <div id="gallery-container" class="gallery-grid"></div>
+            
             <div class="modal-footer">
                 <button class="btn-reset" onclick="resetPilihanModal()">Reset</button>
-                <button id="btn-submit-modal" class="btn-submit" onclick="konfirmasiPilihan()" disabled>Select</button>
+                <button id="btn-submit-modal" class="btn-submit" onclick="konfirmasiPilihan()" disabled>Select (0/26)</button>
             </div>
         </div>
     </div>
 
-    <button id="btn-scroll-top" class="scroll-top-btn" onclick="scrollToTop()">▲</button>
+    <!-- Scroll to Top Button -->
+    <button id="btn-scroll-top" class="scroll-top-btn" onclick="scrollToTop()" title="Back to top">
+        ▲
+    </button>
+
+    <!-- Main JavaScript -->
+    <script src="database.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

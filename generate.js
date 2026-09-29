@@ -58,13 +58,7 @@ function processBosses(dir) {
 const karakterData = processCharacters('assets/karakter');
 const bossData = processBosses('assets/boss');
 
-const dataGabungan = {
-    karakterDB: karakterData,
-    bossDB: bossData
-};
-
-const konten = JSON.stringify(dataGabungan, null, 4);
-
-fs.writeFileSync('database.json', konten);
+const konten = `const karakterDB = ${JSON.stringify(karakterData, null, 4)};\nconst bossDB = ${JSON.stringify(bossData, null, 4)};`;
+fs.writeFileSync('database.js', konten);
 
 console.log("✅ Database JSON terstruktur berhasil diperbarui!");
